@@ -33,6 +33,8 @@ class Matrix
         Ui.print_eating_message
       end
       self[col, row] = piece
+      piece.position = [col, row]
+      become_queen(piece) if piece.is_a?(Pawn) && pawn_reached_opposite_row?(piece, row)
     end
 
     def remove(col, row)
@@ -42,6 +44,22 @@ class Matrix
     def out_of_range(column, row)
       raise "#{column} is out of range" if column < 0 || column >= @boxes.size
       raise "#{row} is out of range" if row < 0 || row >= @boxes[0].size
+    end
+
+    def become_queen(piece)
+      x = piece.position[0]
+      y = piece.position[1]
+      if piece.color == :white
+        self[x, y] = Queen.new(:white, [x, y])
+      else
+        self[x, y] = Queen.new(:black, [x, y])
+      end
+      Ui.pawn_became_queen_message
+    end
+
+    def pawn_reached_opposite_row?(piece, row)
+      piece.color == :white && row == 7 ||
+      piece.color == :black && row == 0
     end
 
 ##########################

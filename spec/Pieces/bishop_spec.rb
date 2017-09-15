@@ -8,7 +8,6 @@ describe Bishop do
   context ".possible_moves" do
     it "returns an array with all possible moves" do
       subject.valid_move_aux
-      binding.pry
       expect(subject.possible_moves.size).to eql(13)
     end
   end

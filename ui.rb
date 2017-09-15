@@ -8,10 +8,6 @@ class Ui
     puts '-----------------------------------------------------'
   end
 
-  def self.game_over_message
-    puts "No one wins. Sorry... Try again !"
-  end
-
   def self.not_valid_message
     puts "\nI didn't get this. Could you repeat ?"
     puts "You need to write a number between 0 and 7"
@@ -85,6 +81,23 @@ class Ui
     puts '-----------------------------------------------------'
     puts "==> Congrats, you ate an ennemy's piece !!"
   end
+
+  def self.pawn_became_queen_message
+    puts '-----------------------------------------------------'
+    puts "\n==> Congrats !! Your pawn became a queen !!"
+    puts '-----------------------------------------------------'
+
+  end
+
+  def self.save_game_question
+  puts '--------------------------'
+  puts "Do you want to save the game and quit ? If so, write 'save'. If no, just push enter."
+  puts '--------------------------'
+end
+
+def self.load_question
+  puts "～～～ Do you want to load a previous game ? If so, write 'load'. Otherwise, just push enter."
+end
 
     def self.board_display(board)
       puts "  ---------------------------------"

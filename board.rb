@@ -21,12 +21,13 @@ class Board
     piece = @matrix[piece_position[0], piece_position[1]]
     @matrix.play(piece, new_position[0], new_position[1])
     remove_piece(piece_position)
-    piece.position = new_position
   end
 
   def remove_piece(piece_position)
     @matrix.remove(piece_position[0], piece_position[1])
   end
+
+  #installation of the board :
 
   def install_game
     install_pawns
@@ -78,8 +79,4 @@ class Board
     @matrix[4, 0] = @white_king
     @matrix[4, 7] = @black_king
   end
-
-  def victory?
-  end
-
 end

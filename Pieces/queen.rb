@@ -23,13 +23,8 @@ class Queen  < Piece
   def valid_move_aux
     starting_x = @position[0]
     starting_y = @position[1]
-    #row :
-    (starting_x..7).each { |x| @possible_moves << [x, starting_y] }
-    (0..starting_x).each { |x| @possible_moves << [x, starting_y] }
-    #column :
-    (starting_y..7).each { |y| @possible_moves << [starting_x, y]}
-    (0..starting_y).each { |y| @possible_moves << [starting_x, y]}
-    #diagonals :
+    rows_from_starting_point(starting_x, starting_y)
+    columns_from_starting_point(starting_x, starting_y)
     right_up_diagonal
     left_down_diagonal
     left_up_diagonal

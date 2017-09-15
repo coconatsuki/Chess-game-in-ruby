@@ -18,6 +18,7 @@ class Game
   end
 
   def launch_game
+    Ui.load_question
     game
     winner = who_wins if victory?
     end_game(winner)
@@ -25,9 +26,10 @@ class Game
   end
 
   def game
-    while !(victory? || game_over?)
+    while !victory?
+      Ui.save_game_question
       one_turn(white)
-      one_turn(black) if !(victory? || game_over?)
+      one_turn(black) if !victory?
     end
   end
 
@@ -94,7 +96,6 @@ class Game
       Ui.board_display(@board)
       Ui.victory_message(winner)
     end
-    Ui.game_over_message if game_over?
   end
 
   def victory?
@@ -102,8 +103,8 @@ class Game
   end
 
   def who_wins
-    return "white" if !any_black_king?
-    return "black" if !any_white_king?
+    "white" if !any_black_king?
+    "black" if !any_white_king?
   end
 
     def any_white_king?
@@ -118,13 +119,9 @@ class Game
       end
     end
 
-      def board_squares
-        @board.matrix.boxes.flatten
-      end
-
-  def game_over?
-    false
-  end
+    def board_squares
+      @board.matrix.boxes.flatten
+    end
 
   def exit_now
     exit

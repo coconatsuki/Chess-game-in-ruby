@@ -14,20 +14,12 @@ describe Matrix do
       subject[1, 2] = 8
       expect(subject.boxes[1][2]).to eql(8)
     end
-    it "raises an error if outside of the matrix" do
-      expect { subject[-1, 2] = 8 }.to raise_error(RuntimeError)
-      expect { subject[1, 9] = 8 }.to raise_error(RuntimeError)
-    end
   end
 
   context ".[]" do
     it "reads a box" do
       subject[1, 2] = 8
       expect(subject[1, 2]).to eql(8)
-    end
-    it "raises an error if outside of the matrix" do
-      expect { subject[-1, 2] }.to raise_error(RuntimeError)
-      expect { subject[1, 9] }.to raise_error(RuntimeError)
     end
   end
 
@@ -85,13 +77,6 @@ describe Matrix do
     it "returns false if a box is occupied" do
       subject[1, 2] = 'X'
       expect(subject.available?(1, 2)).to be false
-    end
-  end
-
-  context ".play" do
-    it "adds a symbol to a box if it's available" do
-      subject.play(1, 2, 'X')
-      expect(subject[1, 2]).to eql('X')
     end
   end
 

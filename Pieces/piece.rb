@@ -54,8 +54,8 @@ class Piece
   end
 
 ##############
-#to get the different pathes,
-#so that we can check later if there's a piece on the path.
+#to get the different paths,
+#so we can check that there's no piece on the way (that all squares are nil).
 
   def column_path(starting, ending, board)
     if starting[1] < ending[1]
@@ -85,7 +85,17 @@ class Piece
     end
   end
   ###############
-  #to construct the diagonals of the bishop's and queen's possible_moves :
+  #to construct the queen's, rook's and bishop's possible_moves :
+
+  def rows_from_starting_point(starting_x, starting_y)
+    (starting_x..7).each { |x| @possible_moves << [x, starting_y] }
+    (0..starting_x).each { |x| @possible_moves << [x, starting_y] }
+  end
+
+  def columns_from_starting_point(starting_x, starting_y)
+    (starting_y..7).each { |y| @possible_moves << [starting_x, y]}
+    (0..starting_y).each { |y| @possible_moves << [starting_x, y]}
+  end
 
   def right_up_diagonal
     x = @position[0]

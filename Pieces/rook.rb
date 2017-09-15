@@ -9,8 +9,6 @@ class Rook  < Piece
     @possible_moves = []
   end
 
-  #target_occupied_by_ennemy?(target, board)
-
   def valid_move?(board, target)
     x = @position[0]
     y = @position[1]
@@ -25,12 +23,8 @@ class Rook  < Piece
   def valid_move_aux
     starting_x = @position[0]
     starting_y = @position[1]
-    #row :
-    (starting_x..7).each { |x| @possible_moves << [x, starting_y] }
-    (0..starting_x).each { |x| @possible_moves << [x, starting_y] }
-    #column :
-    (starting_y..7).each { |y| @possible_moves << [starting_x, y]}
-    (0..starting_y).each { |y| @possible_moves << [starting_x, y]}
+    rows_from_starting_point(starting_x, starting_y)
+    columns_from_starting_point(starting_x, starting_y)
     @possible_moves.delete(@position)
   end
 
