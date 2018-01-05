@@ -1,3 +1,4 @@
+require 'json'
 require './board'
 require './ui'
 require './Pieces/piece'
@@ -9,6 +10,8 @@ require './Pieces/knight'
 require './Pieces/rook'
 
 class Game
+  SAVE_FILE = 'save.json'
+
   attr_accessor :board, :white, :black
 
   def initialize
@@ -18,7 +21,7 @@ class Game
   end
 
   def launch_game
-    Ui.load_question
+    loading if load_game?
     game
     winner = who_wins if victory?
     end_game(winner)
@@ -27,9 +30,10 @@ class Game
 
   def game
     while !victory?
-      Ui.save_game_question
+      save_game?
       one_turn(white)
       one_turn(black) if !victory?
+      Ui.board_display(@board)
     end
   end
 
@@ -125,5 +129,34 @@ class Game
 
   def exit_now
     exit
+  end
+
+  #LOAD AND SAVE METHODS :
+
+  def save_game?
+    answer = Ui.save_game_question
+    if answer.downcase == 'save'
+      saving
+      exit_now
+    end
+  end
+
+  def load_game?
+    answer = Ui.load_question
+    answer.downcase == 'load'
+  end
+
+  def saving
+    File.open(SAVE_FILE, 'w') do |file|
+      file.puts Marshal.dump(@board.matrix)
+    end
+  end
+
+
+  def loading
+    loaded_game = File.open(SAVE_FILE, 'r') do |file|
+                  Marshal.load(file.read)
+                end
+    @board.matrix = loaded_game
   end
 end

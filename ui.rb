@@ -90,13 +90,15 @@ class Ui
   end
 
   def self.save_game_question
-  puts '--------------------------'
-  puts "Do you want to save the game and quit ? If so, write 'save'. If no, just push enter."
-  puts '--------------------------'
+  puts '-----------------------------------------------------'
+  puts '-----------------------------------------------------'
+  puts "==> Do you want to save the game and quit ? If so, write 'save'. If no, just push enter."
+  gets.chomp
 end
 
 def self.load_question
-  puts "～～～ Do you want to load a previous game ? If so, write 'load'. Otherwise, just push enter."
+  puts "\n～～～ If you want to lead a previous game, write 'load'. Otherwise, just push enter."
+  gets.chomp
 end
 
     def self.board_display(board)
